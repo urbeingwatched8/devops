@@ -1,14 +1,12 @@
-version: "3.9"
+version: '3'
 
 services:
-  db:
-    image: postgres
+  sqlite3:
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
     volumes:
-      - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - ./db/:/root/db
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -17,4 +15,4 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      - sqlite3
