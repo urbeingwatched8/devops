@@ -1,3 +1,4 @@
+[![CI](https://github.com/urbeingwatched8/devops/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/urbeingwatched8/devops/actions/workflows/github-actions-demo.yml)
 # devops
 Lab1-2 - created the simplest Python web app using Django and Sqlite3. Put it in the Docker container.
 How to install Python:
