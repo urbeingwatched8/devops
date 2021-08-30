@@ -25,4 +25,4 @@ More info, if needed, can be found on Jenkins documentation. https://www.jenkins
 
 I followed this tutorial - https://www.jenkins.io/doc/tutorials/create-a-pipeline-in-blue-ocean/
 After accessing localhost:8000, I did everything according to the file with homework task.
-Everything worked fine for me and I can provide screenshots on telegram if needed. 
+Everything worked fine for me and I can provide screenshots on telegram if needed.
