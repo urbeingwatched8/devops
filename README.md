@@ -18,3 +18,8 @@ With SQLite, in-memory database is used for testing, but I added a line to setti
 As my site is showing current time now, I ran a test to check that there is no problem with identifying the current time for system 
 For Django unit tests Python module unittest is used. 
 I use command 'python manage.py test tests' to run them, the goal is to see 'Ran 1 test in 0.001s OK'
+
+For Github actions I used github website itself, and Jenkins was ran on localhost (more is specified in CI.md)
+
+#Lab 4
+I got familiar with Terraform, used Vargant for creating virtual box instance and also created an instance on AWS (more specified on TF.md)
