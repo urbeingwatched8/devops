@@ -32,3 +32,12 @@ Ansible installation:
 2. 'sudo python -m pip install ansible'
 
 Docker role created after analysing this: https://github.com/geerlingguy/ansible-role-docker
+
+THERE ARE MORE FOLDERS IN /roles/docker and /roles/app because they were created automatically! please look at the necessary folders only
+
+#Lab 6
+How to install Ansible-Lint:
+
+'pip install ansible-lint'
+
+Mostly followe https://docs.ansible.com/ansible/2.5/modules, avoiding shell and command modules as mentioned

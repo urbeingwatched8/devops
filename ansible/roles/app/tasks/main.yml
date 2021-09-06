@@ -1,0 +1,63 @@
+---
+- name: Requirements Before Docker 1
+  become: true
+  apt:
+    state: latest
+    name:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gpg-agent
+    - software-properties-common
+
+- name: for Docker2
+  become: true
+  apt_key:
+    state: present
+    url: https://download.docker.com/linux/ubuntu/gpg
+
+- name: For Docker3
+  become: true
+  apt_repository:
+    state: present
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+
+- name: Docker installation
+  package:
+    state: latest
+    name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+  notify: restart docker
+  #ignore_errors: "{{ ansible_check_mode }}"
+
+- name: python pip installation
+  become: true
+  package:
+    state: latest
+    name: "python3-pip"
+
+- name: Make Docker_compose_dir
+  file:
+    path: "{{ docker_compose_dir }}"
+    state: directory
+    mode: 0755
+  #when: docker_daemon_options.keys() | length > 0
+
+- name: Copy your docker-compose.yml file on the VM
+  copy:
+    src: docker-compose.yml
+    dest: "{{ docker_compose_dir }}/docker-compose.yml"
+    mode: 0644
+#tried to follow this https://docs.ansible.com/ansible/2.5/modules/template_module.html
+
+- name: Run Docker container
+  docker_container:
+    name: newestapp
+    image: urbeingwatched8/devopslab1:newestapp
+    ports: "{{ ports }}"
+
+#tried to follow this https://docs.ansible.com/ansible/2.5/modules/docker_container_module.html
+
+#This helped me for installing docker here: https://question-it.com/questions/1607841/ustanovite-docker-na-ubuntu-ispolzuja-ansible-s-python3
