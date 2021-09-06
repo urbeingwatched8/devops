@@ -23,3 +23,12 @@ For Github actions I used github website itself, and Jenkins was ran on localhos
 
 #Lab 4
 I got familiar with Terraform, used Vargant for creating virtual box instance and also created an instance on AWS (more specified on TF.md)
+
+#Lab 5 
+Ansible installation:
+
+1.'sudo python get-pip.py'
+
+2. 'sudo python -m pip install ansible'
+
+Docker role created after analysing this: https://github.com/geerlingguy/ansible-role-docker
