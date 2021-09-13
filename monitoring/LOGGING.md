@@ -23,4 +23,4 @@ These are available containers and visible labels:
 ![alt text](https://github.com/urbeingwatched8/devops/blob/8f1d0a15b5da66fd6c25f88366c004acb1c85b75/monitoring/pictures/photo_2021-09-13_13-05-58.jpg?raw=true)
 
 This is how I see logs now:
-![alt text](https://github.com/urbeingwatched8/devops/blob/8f1d0a15b5da66fd6c25f88366c004acb1c85b75/monitoring/pictures/photo_2021-09-13_13-05-58.jpg?raw=true)
+![alt text](https://github.com/urbeingwatched8/devops/blob/cf282f384ee616dd1340d8c2425497ba77e34a82/monitoring/pictures/photo_2021-09-13_13-41-34.jpg?raw=true)
