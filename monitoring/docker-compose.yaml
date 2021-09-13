@@ -1,0 +1,111 @@
+version: '3.7'
+
+networks:
+  monitoring.network:
+    ipam:
+      driver: default
+
+services:
+  #prometheus:
+  #  image: prom/prometheus:${PROMETHEUS_VERSION}
+  #  container_name: monitoring.prometheus
+  #  volumes:
+  #    - ${PWD}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  #    - prometheus-data:/prometheus
+  #  command:
+  #    - '--config.file=/etc/prometheus/prometheus.yml'
+  #    - '--storage.tsdb.path=/prometheus'
+  #    - '--web.console.libraries=/etc/prometheus/console_libraries'
+  #    - '--web.console.templates=/etc/prometheus/consoles'
+  #    - '--storage.tsdb.retention.time=14d'
+  #    - '--web.enable-lifecycle'
+  #    - '--storage.tsdb.wal-compression'
+  #    - '--storage.tsdb.max-block-duration=4h'
+  #    - '--storage.tsdb.wal-segment-size=60MB'
+  #    - '--storage.tsdb.allow-overlapping-blocks'
+  #    - '--query.max-samples=5000000'
+  #  restart: unless-stopped
+  #  expose:
+  #    - 9090
+  #  networks:
+  #    - monitoring.network
+  #  labels:
+  #    org.label-schema.group: "monitoring"
+
+  app:
+    image: urbeingwatched8/devopslab1:newestapp
+    container_name: my.app
+    ports:
+      - "8000:8000"
+    #restart: unless-stopped
+    networks:
+      - monitoring.network
+    logging:
+      driver: "json-file"
+      options:
+        tag: "{{ .ImageName }}|{{ .Name }}"
+
+  grafana:
+    image: grafana/grafana #:${GRAFANA_TAG}
+    container_name: monitoring.grafana
+    #volumes:
+      #- grafana-data:/var/lib/grafana
+      #- ${PWD}/grafana/provisioning:/etc/grafana/provisioning
+    #environment:
+    #  - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+    #  - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+    #  - GF_USERS_ALLOW_SIGN_UP=false
+    #  - VIRTUAL_HOST=monitoring.grafana
+    #  - NETWORK_ACCESS=internal
+    #  - VIRTUAL_PORT=3000
+    #restart: unless-stopped
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring.network
+    labels:
+      org.label-schema.group: "monitoring"
+  
+  promtail:
+    image: grafana/promtail #:${PROMTAIL_TAG}
+    container_name: monitoring.promtail
+    expose:
+      - 9080
+    ports:
+      - "9080:9080"
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - ./promtail.yml:/etc/promtail/promtail.yml
+      #- promtail-data:/var/lib/promtail/positions
+      #- ${PWD}/promtail/promtail.yml:/etc/promtail/promtail.yml
+    command: -config.file=/etc/promtail/promtail.yml
+    restart: unless-stopped
+    networks:
+      - monitoring.network
+    labels:
+      org.label-schema.group: "monitoring"
+  
+  loki:
+    image: grafana/loki #:${LOKI_TAG}
+    container_name: monitoring.loki
+    expose:
+      - 3100
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki.yml:/etc/loki/loki.yml
+      #- ${PWD}/loki/loki-config.yml:/etc/loki-config.yaml
+    #  - loki-data:/tmp/loki/
+    command: -config.file=/etc/loki/loki.yml
+    restart: unless-stopped
+    networks:
+      - monitoring.network
+    labels:
+      org.label-schema.group: "monitoring"
+      
+volumes:
+  #prometheus-data: {}
+  grafana-data: {}
+  loki-data: {}
