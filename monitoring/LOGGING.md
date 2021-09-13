@@ -1,3 +1,4 @@
+Lab 7
 I familiarized myself with provided materials, and this link was extremely useful.
 https://github.com/black-rosary/loki-nginx
 
@@ -24,3 +25,5 @@ These are available containers and visible labels:
 
 This is how I see logs now:
 ![alt text](https://github.com/urbeingwatched8/devops/blob/cf282f384ee616dd1340d8c2425497ba77e34a82/monitoring/pictures/photo_2021-09-13_13-41-34.jpg?raw=true)
+
+For Lab 8, METRICS.md file would be more useful

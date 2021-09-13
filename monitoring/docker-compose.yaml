@@ -1,3 +1,4 @@
+#i only took necessary parts from this: https://github.com/black-rosary/loki-nginx/blob/master/docker-compose.yml
 version: '3.7'
 
 networks:
@@ -6,35 +7,47 @@ networks:
       driver: default
 
 services:
-  #prometheus:
-  #  image: prom/prometheus:${PROMETHEUS_VERSION}
-  #  container_name: monitoring.prometheus
-  #  volumes:
-  #    - ${PWD}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-  #    - prometheus-data:/prometheus
-  #  command:
-  #    - '--config.file=/etc/prometheus/prometheus.yml'
-  #    - '--storage.tsdb.path=/prometheus'
-  #    - '--web.console.libraries=/etc/prometheus/console_libraries'
-  #    - '--web.console.templates=/etc/prometheus/consoles'
-  #    - '--storage.tsdb.retention.time=14d'
-  #    - '--web.enable-lifecycle'
-  #    - '--storage.tsdb.wal-compression'
-  #    - '--storage.tsdb.max-block-duration=4h'
-  #    - '--storage.tsdb.wal-segment-size=60MB'
-  #    - '--storage.tsdb.allow-overlapping-blocks'
-  #    - '--query.max-samples=5000000'
-  #  restart: unless-stopped
-  #  expose:
-  #    - 9090
-  #  networks:
-  #    - monitoring.network
-  #  labels:
-  #    org.label-schema.group: "monitoring"
+  pprometheus:
+    image: prom/prometheus #:${PROMETHEUS_VERSION}
+    container_name: monitoring.prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=14d'
+      - '--web.enable-lifecycle'
+      - '--storage.tsdb.wal-compression'
+      - '--storage.tsdb.max-block-duration=4h'
+      - '--storage.tsdb.wal-segment-size=60MB'
+      - '--storage.tsdb.allow-overlapping-blocks'
+      - '--query.max-samples=5000000'
+    restart: unless-stopped
+    expose:
+      - 9090
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring.network
+    labels:
+      org.label-schema.group: "monitoring"
+    #mem limits are based on what i've seen during the lab 
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+        tag: "{{.ImageName}}|{{.Name}}"
 
-  app:
+  
+  python-app:
     image: urbeingwatched8/devopslab1:newestapp
     container_name: my.app
+    expose:
+      - 8000
     ports:
       - "8000:8000"
     #restart: unless-stopped
@@ -106,6 +119,7 @@ services:
       org.label-schema.group: "monitoring"
       
 volumes:
-  #prometheus-data: {}
+  prometheus-data: {}
   grafana-data: {}
   loki-data: {}
+  promtail-data: {}
