@@ -50,11 +50,11 @@ jobs:
             if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
             run: |
                     poetry install
+                    poetry run mypy --config-file pyproject.toml ./
                     poetry run mypy --install-types --non-interactive ./
 
           - name: Test with pytest&poetry
             run: |
-              poetry run mypy --config-file pyproject.toml ./
               poetry run pytest app_python/manage.py
 
   build-and-push:
