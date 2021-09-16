@@ -17,3 +17,15 @@ Add it to the requirements.txt
 For creating 'blog' to make an HTML file:
 "python manage.py makemigrations blog"
 "python manage.py migrate blog"
+
+LAB 3
+My unit tests:
+I decided to run a test which checks that the time on my app is precise.
+I imported 'from django.test import TestCase' to run it and compared my way of reflecting & printing time to time from imported django timezone.
+
+Best testing practices:
+1. Use a controlled security environment for testing
+2. Tests should be broken into small fractions
+3. All tests should be reported and noted. 
+4. Testing should be customized
+5. Target operating model for testing should be developed.

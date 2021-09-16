@@ -11,7 +11,7 @@ Add it to the requirements.txt
 "pip install -r requirements.txt"
 
 #Lab 3 
-For tests: 
+UNIT TESTS: 
 With SQLite, in-memory database is used for testing, but I added a line to settings.py to make sure everything works well: 
 'TEST': {'ENGINE': 'django.db.backends.sqlite3',} 
  
@@ -19,7 +19,8 @@ As my site is showing current time now, I ran a test to check that there is no p
 For Django unit tests Python module unittest is used. 
 I use command 'python manage.py test tests' to run them, the goal is to see 'Ran 1 test in 0.001s OK'
 
-For Github actions I used github website itself, and Jenkins was ran on localhost (more is specified in CI.md)
+For Github actions I used github website itself. The action has 3 stages, test, build and push. To save time, we use cache for building: build stage without cache takes 1 min 53 sec, and with cache it takes 28 seconds. The status badge changes with some time delay, but still works fine.
+Jenkins was ran on localhost (more is specified in CI.md)
 
 #Lab 4
 I got familiar with Terraform, used Vargant for creating virtual box instance and also created an instance on AWS (more specified on TF.md)

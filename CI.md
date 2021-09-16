@@ -1,12 +1,17 @@
 Github actions:
 
-Github actions allow to build, test and publish the project.
+Github actions allow to build, test and publish the project (now all stages work fine).
 
 No installations needed, I worked on Github.com with the files that I already pushed. 
 
 A good tutorial that I followed:https://docs.github.com/en/actions/quickstart (basically, after that I could see that my tests work in Actiona)
 
-It is important to keep actions minimal, make sure that secrets aren't public and to limit environment variables.
+Best Practices:
+1. Keep actions minimal.
+2. Make sure that secrets aren't public (hardcoded).
+3. Limit environment variables.
+4. Don't install unnecessary dependencies.
+5. Make sure that every repository contains a workflow.
 
 After seeing simplest actions working, I edited the github-actions-demo.yml file according to Docker documentation to check that everything is fine with Docker. (https://docs.docker.com/ci-cd/github-actions/)
 
@@ -14,7 +19,17 @@ After docker bulidx is set up, the image can be pushed, and we can use cache lat
 
 Jenkins:
 
-The best practices are to keep the Jenkins secure, setup a different project for each branch, to do a backup and to create a scalable pipeline.
+The best practices are:
+
+1.Keep the Jenkins secure.
+
+2.Set up a different project for each branch.
+
+3.Do backup (by using plugins, for example).
+
+4.Create a scalable pipeline.
+
+5.Avoid resource collisions for parallel running jobs.
 
 I took the security issue too seriously and couldn't even login as admin at some point.
 
