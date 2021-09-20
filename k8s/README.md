@@ -1,24 +1,18 @@
-as command line:
+Lab 9
+Kubernetes
 
-kubectl get pods,svc
-NAME                                       READY   STATUS             RESTARTS        AGE
-pod/kubernetes-bootcamp-7b6c8cb486-jzbct   1/1     Running            0     		15m
+How to install Kubernetes:
+1. 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+2. 'curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"'
+3. 'echo "$(<kubectl.sha256) kubectl" | sha256sum --check'
+4. 'sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl'
 
-NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-service/kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP          23m
-service/kubernetes-bootcamp   LoadBalancer   10.111.38.197   10.111.38.197   8080:32602/TCP   19s
+Basically, I was following the tutorials from given links. Kubernetes interactive tutorial was the most helpful.
+To make load balancer work better (external IP) I used command 'minikube tunnel' in another terminal.
 
-as files:
-urbenata8@urbenata8-N552VW:~/Downloads/devopslab1/k8s$ kubectl apply -f ./
-deployment.apps/web created
-service/web created
-urbenata8@urbenata8-N552VW:~/Downloads/devopslab1/k8s$ kubectl get pods,svc
-NAME                       READY   STATUS    RESTARTS   AGE
-pod/web-6d46b5b859-4zw2c   1/1     Running   0          4s
-pod/web-6d46b5b859-7v27l   1/1     Running   0          4s
-pod/web-6d46b5b859-kkgnz   1/1     Running   0          4s
+Result from 'kubectl get pods,svc' after steps 1-5:
+![alt text](https://github.com/urbeingwatched8/devops/blob/abb2319cf2bd57883f8f045f2ee3bdccd59bd369/k8s/screenshots/%D0%91%D0%B5%D0%B7%D1%8B%D0%BCffds%D1%8F%D0%BD%D0%BD%D1%8B%D0%B9.png?raw=true)
 
-NAME                 TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE
-service/kubernetes   ClusterIP      10.96.0.1        <none>           443/TCP          14h
-service/web          LoadBalancer   10.102.255.131   10.102.255.131   8000:30130/TCP   4s
-
+For steps 7-9, I faced an issue with connecting to DB so I worked with 'kompose' (which helped me to translate docker-compose.yml to kubernetes resources). I got many different files but I compiled them into 2 (deployment.yml, service.yml) and everything worked perfectly.
+The result with 3 replicas:
+![alt text](https://github.com/urbeingwatched8/devops/blob/abb2319cf2bd57883f8f045f2ee3bdccd59bd369/k8s/screenshots/photo_2021-09-20_13-05-08.jpg?raw=true)
