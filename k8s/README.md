@@ -1,11 +1,15 @@
 Lab 9
 Kubernetes
 
-How to install Kubernetes:
+How to install kubectl:
 1. 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
 2. 'curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"'
 3. 'echo "$(<kubectl.sha256) kubectl" | sha256sum --check'
 4. 'sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl'
+
+How to install minikube:
+1. 'curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64'
+2. 'sudo install minikube-linux-amd64 /usr/local/bin/minikube'
 
 Basically, I was following the tutorials from given links. Kubernetes interactive tutorial was the most helpful.
 To make load balancer work better (external IP) I used command 'minikube tunnel' in another terminal.
