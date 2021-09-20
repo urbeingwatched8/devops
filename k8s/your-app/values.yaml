@@ -45,7 +45,7 @@ securityContext: {}
 service:
   type: LoadBalancer
   port: 8000
-  nodePort: 3000
+  #nodePort: 3000
 
 ingress:
   enabled: false
