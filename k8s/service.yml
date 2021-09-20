@@ -1,0 +1,40 @@
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: devopslab
+#spec:
+#  selector:
+#    app: devopslab
+#  ports:
+#    - protocol: TCP
+     # port: 8000
+   #   targetPort: 9376
+   #   nodePort: 937
+  #clusterIP: 10.0.171.239
+ # type: LoadBalancer
+#status:
+ # loadBalancer:
+  #  ingress:
+   # - ip: 192.168.99.102
+   
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web
+  name: web
+spec:
+  ports:
+  - name: "8000"
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: LoadBalancer
+  selector:
+    io.kompose.service: web
+#status:
+ # loadBalancer: {}
