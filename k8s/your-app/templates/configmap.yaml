@@ -1,0 +1,15 @@
+#https://www.ibm.com/cloud/architecture/content/course/helm-fundamentals/chart-template-helpers/ 
+#example
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: your-app
+  labels:
+    app: your-app
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}  #- configMap
+data:
+  config.json: {{ .Files.Get "files/config.json" | quote }}
+immutable: true
