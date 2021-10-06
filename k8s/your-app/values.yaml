@@ -18,7 +18,7 @@ image:
 
 volumes:
   #configPath: "/etc/config"
-  visits: "/home/Downloads/debopslab1/app_python"
+  visits: "/visits"
 
 
 imagePullSecrets: []

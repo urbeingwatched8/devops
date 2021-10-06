@@ -46,3 +46,6 @@ Mostly followe https://docs.ansible.com/ansible/2.5/modules, avoiding shell and 
 #Lab 12
 I looked up for best ideas to implement 'visits' on django and found this: https://github.com/bruth/django-tracking2 .  
 We need to run 'pip install django-tracking2', edit a few files after that, and it will work perfectly fine. On the screenshot there is a dashboard, but there are other ways to view data as well.  THERE WAS NO NEED TO EDIT docker-compose.yml: we need to change dir to app_python, then do commands 'python manage.py migrate' and after that 'sudo docker-compose run web' to make it work nicely and easily.
+
+#Lab 13 
+Visits were redone using FastAPI because 'django-tracking' output was inaccessinble if we didn't login as django admin. 
